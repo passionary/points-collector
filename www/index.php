@@ -24,9 +24,8 @@
             }
             img{
                 display: block;
-                height:657px;
-                width:1366px;
-                opacity: 0.9;
+                width: 100%;
+                height: 100%;
             }
             #auth{
                 position: absolute;
@@ -132,7 +131,7 @@
         </style>
     </head>
     <body>
-        <img src="joshua-rodriguez-E-DFV53MXOc-unsplash.jpg">       
+        <img src="bounces.png">       
         <form method="POST" action="/index.php">
             <div id="auth">
                 <h2>Authorisation</h2>

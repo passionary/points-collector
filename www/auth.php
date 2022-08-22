@@ -2,6 +2,13 @@
 	require_once 'db.php';
 	$no_let = false;
 	$double = false;
+	$short_name = '';
+	$short_password = '';
+	$empty_name = '';
+	$coincidenced_name = '';
+	$coincidenced_password = '';
+	$no_coin_pswd = '';
+	
 	if(isset($_POST) && $_SERVER['REQUEST_METHOD'] == 'POST')
 	{
 		if (isset($_POST['name'])); 

@@ -1,3 +1,3 @@
 <?php
-	$db = new PDO("mysql:host=localhost;dbname=base",'passionary','livescript456');
+	$db = new PDO("mysql:host=localhost;dbname=points-collector",'root','');
 ?>
