@@ -7,6 +7,7 @@
 	require_once 'db.php';
 	$let = false;
 	$errors = array();
+	$error_password = '';
 	if(isset($_POST) && $_SERVER['REQUEST_METHOD'] == 'POST')
 	{
 		$login = $_POST['login'];
@@ -38,21 +39,20 @@
 				$errors[] = $error_password;
 			}
 		}
+		$class = '';
 		if(!empty($errors))
 		{
 			foreach($errors as $message)
 			{
-				if ($message == $no_login) 
+				if ($errors[0] == $no_login) 
 				{
-					$Ycoord = '42.7%';
+					$class = 'name';
 				}
-				if(in_array($error_password,$errors))
-				{
-					$Ycoord = '50.3%';
+				else if($errors[0] == $error_password) {
+					$class = 'password';
 				}
 			}
-				echo "<p style=\"top:$Ycoord;left:55.2%;font-family:Bork Display;color:red;z-index:1000;font-size:8px;width:70px;
-		 line-height:6px;\">".array_shift($errors)."</p>";
+				echo "<p class=\"$class $errors[0]\">".array_shift($errors)."</p>";
 		}
 	}
 ?>

@@ -18,11 +18,22 @@
             background-size: cover;
             min-height: 100vh;
 		}
-		img{
-			display: block;
-            height:100%;
-            width:100%;
-		}
+		.name {
+            position: absolute;
+            line-height: 7px;
+            color:red;
+            top: 454px;
+            left: 668px;
+            font-size: 10px;
+        }
+        .password {
+            position: absolute;
+            line-height: 7px;
+            color:red;
+            left: 668px;
+            top: 509px;
+            font-size: 10px;
+        }
         .wrapper {
             display: flex;
             justify-content: center;
@@ -44,7 +55,7 @@
             font-family: AunchantedXspaceThin;
         }
         .title-main {
-            margin-top: 63px;
+            margin-top: 43px;
             font-size: 110px;
             font-family: arbat;
             margin-bottom: 45px;
@@ -102,7 +113,7 @@
             background: #fff;
             color: #00EE6D;
             font-size: 28px;
-            margin-top: 80px;
+            margin-top: 55px;
             border: none;
             cursor: pointer;
         }
@@ -137,16 +148,16 @@
             <p class="title title-description">2d scorer game</p>
             <h1 class="title title-main">point collector</h1>
             <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="POST" class="submit-form">
-                    <div class="labels input-section margin-bottom">
-                        <label class="label login-label" for="login">Login</label>
-                        <input name="login" id="login" type="text">
-                        <a class="action login-action" href="/">Registration</a>
-                    </div>
-                    <div class="login input-section">
-                        <label class="label password-label" for="password">Confirm Password</label>
-                        <input name="password" type="password" id="password" type="text">
-                        <a class="action password-action" href="/">Show password</a>
-                    </div>
+                <div class="labels input-section margin-bottom">
+                    <label class="label login-label" for="login">Login</label>
+                    <input name="login" id="login" type="text">
+                    <a class="action login-action" href="/">Registration</a>
+                </div>
+                <div class="login input-section">
+                    <label class="label password-label" for="password">Confirm Password</label>
+                    <input name="password" type="password" id="password" type="text">
+                    <a class="action password-action" href="/">Show password</a>
+                </div>
                 <input type="submit" value="SIGN IN" class="submit__btn" />
             </form>
         </div>

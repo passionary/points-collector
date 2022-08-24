@@ -7,114 +7,126 @@
         <meta charset="utf-8">
         <title>Bounce</title>
         <style>
-            .message{
-                color:red;
-                font-size:7px;
-                position: absolute;
-                z-index: 1000;
-                line-height: 7px;
-                width:65px;
-                margin: 0;
-                padding: 0;
-                height:22px;
-            }
-            body{
-                margin: 0;
-                overflow: hidden;
-            }
-            img{
-                display: block;
-                width: 100%;
-                height: 100%;
-            }
-            #auth{
-                position: absolute;
-                left:42%;
-                top:35%;
-                width:240px;
-                height:230px;
-                background-color:#0f1c4c;
-                border-radius: 14%;
-                box-shadow: 0 0 50px inset;
-            }
-            .auth{
-                position: absolute;
-                top:26%;
-                left:38%;
-                z-index: 100;
-                font-size:16px;
-                color:green;
-            }
-            .login{
-                color:#2942ff;
-                font-size:14px;
-                white-space: nowrap;
-                margin-left:10px;
-                position: absolute;
-                left:-2%;
-                top:78.5%;
-                text-shadow: 0 0 1px red;
-            }
-            input{
-                margin-top:7px;
-                margin-bottom:15px;
-                margin-left:27.5%;
-                width:45%;
-                height:25px;
-                border:none;
-                box-shadow: 0 0 2px inset;
-                background-color:black;
-                color:white;
-                border-radius: 5px;
-            }
-            h2{
-                font-size: 19px;
-                margin-top:16px;
-                padding-bottom:0;
-                margin-bottom:7px;
-                color:white;
-                margin-left:51px;
-                font-family:UltratypeBeta;
-                padding-left:0;
-                width:140px;
-                border-bottom:1px solid white;
-                padding-bottom: 5px;
-            }
-            button{
-                background:linear-gradient(to top,#f07f22,white);
-                color:black;
-                text-shadow: 0 0 5px gray;
-                font-weight: bold;
-                margin-left:25%;
-                margin-top:5px;
-                border:none;
-                border-radius: 50px;
-                width:120px;
-                height:24px;
+            * {
+                font-family: Roboto;
                 font-size: 14px;
-                padding-top:0;
-                font-family: arbat; 
+            }
+            body {
+                overflow: hidden;
+                margin:0;
+                background: url('bounces.png') no-repeat;
+                background-size: cover;
+                min-height: 100vh;
+            }
+            .name {
+                position: absolute;
+                line-height: 7px;
+                color:red;
+                top: 454px;
+                left: 668px;
+                font-size: 10px;
+            }
+            .password {
+                position: absolute;
+                line-height: 7px;
+                color:red;
+                left: 668px;
+                top: 509px;
+                font-size: 10px;
+            }
+            .wrapper {
+                display: flex;
+                justify-content: center;
+            }
+            .content {
+                width: 595px;
+            }
+            .margin-top-20 {
+                margin-top: 20px;
+            }
+            .title {
+                text-align: center;
+                text-transform: uppercase;
+                color: #fff;
+            }
+            .title-description {
+                margin-top: 48px;
+                font-size: 29px;
+                font-family: AunchantedXspaceThin;
+            }
+            .title-main {
+                margin-top: 43px;
+                font-size: 110px;
+                font-family: arbat;
+                margin-bottom: 45px;
+            }
+            .submit-form {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            .data-container {
+                display: flex;
+                width: 100%;
+                justify-content: space-between;
+            }
+            .labels {
+                text-align: right;
+            }
+            .input-section label {
+                color: #fff;
+            }
+            .input-section {
+                position: relative;
+                display: flex;
+                flex-direction: column;
+            }
+            .label, .action {
+                position: absolute;
+                white-space: nowrap;
+            }
+            .login-label {
+                left: -70px;
+            }
+            .password-label {
+                left: -95px;
+            }
+            .confirm-password-label {
+                left: -162px;
+            }
+            .login-action {
+                left: 229px;
+            }
+            .password-action {
+                left: 229px;
+                white-space: nowrap;
+            }
+            .input-section a, span {
+                color: #fff;
+            }
+            .input-section input {
+                color: #fff;
+                background: none;
+                border: 1px solid #fff;
+                width: 200px;
+            }
+            .submit__btn {
+                border-radius: 100px;
+                width: 325px;
+                height: 78px;
+                background: #fff;
+                color: #00EE6D;
+                font-size: 28px;
+                margin-top: 55px;
+                border: none;
                 cursor: pointer;
             }
-            p{
-                position: absolute;
-                font-size:14px;
-                color:white;
+            .margin-bottom {
+                margin-bottom: 32px;
             }
-            p:nth-child(2){
-                top:20%;
-                left:12%;
-                font-family: arbat;
-            }
-            p:nth-child(3){
-                top:40%;
-                left:4px;
-                font-family: arbat;
-            }
-            p:nth-child(4){
-                top:60%;
-                left:28px;
-                font-family: arbat;
+            @font-face {
+                font-family: Roboto;
+                src: url(RobotoMono.ttf);
             }
             @font-face{
                 font-family: arbat;
@@ -128,22 +140,36 @@
                 font-family: Bork Display;
                 src:url(17236.otf);
             }
+            @font-face{
+                font-family: AunchantedXspaceThin;
+                src:url(AunchantedXspaceThin.ttf);
+            }
         </style>
     </head>
     <body>
-        <img src="bounces.png">       
-        <form method="POST" action="/index.php">
-            <div id="auth">
-                <h2>Authorisation</h2>
-                <p>Login</p>
-                <p>Password</p>
-                <p>Again</p>
-                <input type="text" name="name">
-                <input type="password" name="password">
-                <input type="password" name="password2">
-                <a href="log.php" class="login">Have you a profile?</a>
-                <button type="submit">CREATE</button>
-            </div> 
-        </form>
+        <div class="wrapper">
+            <div class="content">
+                <p class="title title-description">2d scorer game</p>
+                <h1 class="title title-main">point collector</h1>
+                <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="POST" class="submit-form">
+                    <div class="input-section margin-bottom">
+                        <label class="label login-label" for="login">Login</label>
+                        <input name="name" id="login" type="text">
+                        <a class="action login-action" href="/log.php">Sign In</a>
+                    </div>
+                    <div class="input-section margin-bottom">
+                        <label class="label password-label" for="password">Password</label>
+                        <input name="password" type="password" id="password" type="text">
+                        <a class="action password-action" href="/">Show password</a>
+                    </div>
+                    <div class="input-section">
+                        <label class="label confirm-password-label" for="password2">Confirm Password</label>
+                        <input name="password2" type="password" id="password2" type="text">
+                        <a class="action password-action" href="/">Show password</a>
+                    </div>
+                    <input type="submit" value="REGISTRATION" class="submit__btn" />
+                </form>
+            </div>
+        </div>
     </body>
 </html> 

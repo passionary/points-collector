@@ -33,7 +33,7 @@
 			$no_let = false;
 		}else if(strlen($name) == 0)
 		{
-			$empty_name = 'Поля не должны быть пустыми!';
+			$empty_name = 'Поле не должно быть пустым!';
 			$errors[] = $empty_name;
 			$no_let = true;
 		}
@@ -44,7 +44,7 @@
 			$no_let = false;
 		}else if(strlen($password) == 0)
 		{
-			$empty_password = 'Поля не должны быть пустыми!';
+			$empty_password = 'Поле не должно быть пустым!';
 			$errors[] = $empty_password;
 			$no_let = true;
 		}
@@ -89,43 +89,34 @@
 				{
 					$Xcoord = '55.1%';
 					$Ycoord = '44%';
-					echo "<p class=\"message\" style=\"top:$Ycoord;left:$Xcoord;font-family:Bork Display;\">".array_shift($errors)."</p>";
+					echo "<p class=\"name\">".array_shift($errors)."</p>";
 				}else if ($message == $short_password) 
 				{
 					$Xcoord = '55.1%';
 					$Ycoord = '52%';
-					echo "<p class=\"message\" style=\"top:$Ycoord;left:$Xcoord;font-family:Bork Display;\">".array_shift($errors)."</p>";
+					echo "<p class=\"password\">".array_shift($errors)."</p>";
 				}else if($message == $empty_name)
 				{
 					$Xcoord = '55.1%';
 					$Ycoord = '43.6%';
-					echo "<p class=\"message\" style=\"top:$Ycoord;left:$Xcoord;font-family:Bork Display;\">".array_shift($errors)."</p>";
+					echo "<p class=\"name\">".array_shift($errors)."</p>";
 				}
 				if($message == $no_coin_pswd)
 				{
 					$Xcoord = '55.1%';
 					$Ycoord = '59.3%';
-					echo "<p class=\"message\" style=\"top:$Ycoord;left:$Xcoord;font-family:Bork Display;\">".array_shift($errors)."</p>";
+					echo "<p class=\"password\">".array_shift($errors)."</p>";
 
 				}
 				if($message == $empty_name)
 				{
 					$Xcoord = '55.1%';
 					$Ycoord = '51.5%';
-					echo "<p class=\"message\" style=\"top:$Ycoord;left:$Xcoord;font-family:Bork Display;\">".array_shift($errors)."</p>";
+					echo "<p class=\"name\">".array_shift($errors)."</p>";
 				}else if ($message == $coincidenced_name) 
 				{
 					$double = true;
-					echo "<p style=\"top:26%;left:42.3%;font-family:Bork Display;color:red;z-index:1000;\">Такой логин уже есть</p>"; 	
-				}else if ($message == $coincidenced_password) 
-				{
-					if($double)
-					{
-						echo "<p style=\"top:30%;left:42.3%;font-family:Bork Display;color:red;z-index:1000;\">Такой пароль уже есть</p>";
-					}else
-					{
-						echo "<p style=\"top:30%;left:42.3%;font-family:Bork Display;color:red;z-index:1000;\">Такой пароль уже есть</p>";
-					}
+					echo "<p class=\"name\">Такой логин уже есть</p>"; 	
 				}
 			}
 		}
