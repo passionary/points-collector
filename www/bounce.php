@@ -8,22 +8,13 @@
                 margin: 0;
                 overflow: hidden;
             }
-            .pike{
-                position: absolute;
-                top:57px;                
-                left: 2px;
-            }
-            .pike img{
-                width:30px;
-                height: 40px;
-            }
             #button{
                 position: absolute;
                 width:140px;
                 height: 40px;
                 border-radius: 20px;
                 top:65%;
-                left:27%;
+                left:29%;
                 background-color: orange;
                 color:red;
                 font-size:20px;
@@ -41,7 +32,7 @@
                 height: 40px;
                 border-radius: 20px;
                 top:65%;
-                left:61%;
+                left:60%;
                 background-color: orange;
                 color:red;
                 font-size:20px;
@@ -61,14 +52,17 @@
             table{
                 width:100px;
                 position: absolute;
-                right:27px;
-                top:8.6%;
-                background-color:#ffffff;
-                color:#002bff;
+                left:10px;
+                top:10px;
+                color:#fff;
                 font-family:arbat;
+                border-right: 1px solid white;
+                border-bottom: 1px solid white;
             }
             td{
-                border:1px solid black;
+                text-align: center;
+                padding-right: 22px;
+                padding-bottom: 22px;
             }
             @font-face{
                 font-family: arbat;
@@ -85,7 +79,7 @@
         </style>
     </head>
     <body>
-        <table style="opacity: 0.6;">
+        <table>
             <tr>
                 <td>Name</td>
                 <td>Score</td>
@@ -101,9 +95,7 @@
                     }
                 ?>
         </table>
-        <h2 class="title">2D GAME</h2>
         <canvas id="myCanvas" style="display:block"></canvas>
-        <div class="pike"><img src="pike.png"></div>
         <button id="button">restart</button>
         <button id="save">save</button>
         <script src="/script.js" type="text/javascript" defer></script>

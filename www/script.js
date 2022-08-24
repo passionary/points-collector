@@ -3,7 +3,6 @@ var
 	canvas 			= document.getElementById('myCanvas'), //canvas initialisation
 	ctx   		 	= canvas.getContext('2d'), // take a context
 	//getting a dom objects
-	pike 			= document.querySelector('.pike'),
 	button 			= document.getElementById('button'),
 	save_btn 		= document.getElementById('save'),
 	numbers 		= document.getElementsByTagName('p'),
@@ -15,7 +14,7 @@ var
 	//Rect parameters
 	Xcoord 			= canvas.width/2,
 	Rheight 		= 14,
-	Rwidth 			= 165,
+	Rwidth 			= 250,
 	rightPressed 	= false,
 	leftPressed 	= false,
 	//colors
@@ -26,11 +25,12 @@ var
 	changered 		= false,
 	changegreen 	= false,
 	press_count 	= 0,
-	pikes 			= [], 
 	objects 		= [],
 	velo,acc,F, //bounces paremeters
 	i, // cicle variable
 	timerId,delta,result; // timer parameters
+	rectColor = '#fff';
+	gameOver = false;
 
 //score linked object
 var Bounce = function(x,y,R,speed,t)
@@ -50,7 +50,6 @@ window.onload = function()
 	canvas.style.backgroundColor = 'black';
 	document.addEventListener('keyup',paddleUp,false);
 	document.addEventListener('keydown',paddleDown,false);
-	var pikeInterval = setTimeout(createPike,1500);
 	var movingTimer = setTimeout(moveRect,1);
 	timerId = setTimeout(Run,1000/60);
 }
@@ -58,35 +57,7 @@ window.onload = function()
 button.onclick = function(){
 	window.location.reload();
 }
-//global function to create pikes
-function createPike()
-{
-	if (result <=0 || attempts <= 0) 
-	{
-		clearInterval(pikeInterval);
-		return;
-	}
-	var pikeEx = 
-	{
-		pikeCl:pike.cloneNode(true),
-		x:Random(15,canvas.width-15),
-		y:0
-	}
-	pikeEx.pikeCl.style.left = pikeEx.x + 'px';
-	document.body.appendChild(pikeEx.pikeCl);
-	pikes.push(pikeEx);
-	pikeInterval = setTimeout(createPike,1500);
-}
 
-//global function to move pikes
-function movePikes()
-{
-	for(i=0;i<pikes.length;i++)
-	{
-		pikes[i].y+=5;
-		pikes[i].pikeCl.style.top = pikes[i].y + 'px';
-	}
-}
 //moving keys performing
 function paddleUp(e)
 {
@@ -100,23 +71,10 @@ function paddleDown(e){
 }
 //time performing
 function Time(){
-	var date2 = new Date();
-	var now = date2.getTime();
-	delta = now - start;
-	delta = Math.floor(delta/1000);
-	result = 60 - delta;
-	if (result <=0 || attempts <= 0) {
-		pike.remove();
-		for(i=0;i<pikes.length;i++){
-			pikes[i].pikeCl.remove();
-		}
+	if (gameOver) {
 		button.style.visibility = 'visible';
 		save_btn.style.visibility = 'visible';
 	}
-	ctx.fillStyle = '#675ace';
-	ctx.font = 'bold 23px Arial';
-	if (result<=10) ctx.fillStyle = 'red';
-	ctx.fillText("Time :" + result,10,40);
 }
 //button to save the result of gamer
 save_btn.onclick = function()
@@ -150,31 +108,22 @@ function Run()
 	ctx.clearRect(0,0,canvas.width,canvas.height);
 	ctx.font = 'bold 23px Arial';
 	ctx.fillStyle = 'lightgray';
-	ctx.fillText("SCORE",canvas.width-90,37);	
-	ctx.fillStyle = 'lightblue';
-	ctx.font = 'bold 25px Arial';
-	ctx.fillText("attempts",5,134);
-	ctx.fillStyle = 'lightgreen';		
-	ctx.font = 'bold 18px Arial';
-	ctx.fillStyle = '#675ace';
-	ctx.fillText("- minus 5",34,78);
 	Time();
-	if(result <= 0 || attempts <= 0) 
+	if(gameOver) 
 	{
-		ctx.clearRect(0,0,canvas.width,canvas.height);
+		ctx.clearRect(0,0,canvas.width,canvas.height + 100);
 		canvas.style.backgroundColor = 'black';
 		ctx.font = 'bold 100px arial';
 		ctx.fillStyle = 'red';
-		ctx.fillText(attempts <= 0 ? "GAME OVER" : 'YOUR RESULT',canvas.width/2-320,canvas.height/2-20);
+		ctx.fillText("GAME OVER", canvas.width/2-320,canvas.height/2-20);
 		ctx.fillStyle = 'blue';
 		ctx.font = '55px Times New Roman';
-		ctx.fillText("score:"+score,canvas.width/2+128,canvas.height/2 + 70);
+		ctx.fillText("score:"+score,448,canvas.height/2 + 70);
 		return;
 	}
 	if (objects.length == 0) createBalls();
 	if (objects[objects.length-1].y > 125) createBalls();
 	perform();
-	movePikes();	
 	changeColor();
 	countScore();
 	showScore();
@@ -200,18 +149,19 @@ function drawBalls()
 	for(i=0;i<objects.length;i++)
 	{
 		ctx.beginPath();
-		ctx.arc(objects[i].x,objects[i].y,objects[i].R,0,2*Math.PI,objects[i].bool);
-		ctx.fillStyle = 'white'
-		ctx.strokeStyle = '#22c317';
+		ctx.arc(objects[i].x,objects[i].y,(objects[i].R - 20) * 5,0,2*Math.PI,objects[i].bool);
 		ctx.lineWidth = '5';
+		if(objects[i].m == 33 || objects[i].m == 36 || objects[i].m == 39) {
+			ctx.fillStyle = 'white';
+		}
+		if(objects[i].m == 42 || objects[i].m == 45 || objects[i].m == 48) {
+			ctx.fillStyle = '#fff236';
+		}
+		if(objects[i].m == 51 || objects[i].m == 54) {
+			ctx.fillStyle = '#36ff54';
+		}
 		ctx.fill();
-		ctx.stroke();
 		ctx.closePath();
-		ctx.fillStyle = '#f86926';
-		ctx.font = 'bold 27px Arial'
-		if(objects[i].m == 33 || objects[i].m == 36 || objects[i].m == 39) ctx.fillText('3',objects[i].x-7,objects[i].y+9);
-		if(objects[i].m == 42 || objects[i].m == 45 || objects[i].m == 48) ctx.fillText('5',objects[i].x-9,objects[i].y+9);
-		if(objects[i].m == 51 || objects[i].m == 54) ctx.fillText('10',objects[i].x-15,objects[i].y+9);
 	}
 }
 //count of score
@@ -221,6 +171,10 @@ function countScore()
 	{
 		if(Xcoord <= objects[i].x - objects[i].R + 20 && Xcoord + Rwidth >= objects[i].x + objects[i].R - 20 && objects[i].y > canvas.height-20)
 		{
+			rectColor = 'lightgreen';
+			setTimeout(() => {
+				rectColor = '#fff';
+			}, 200);
 			if(!changegreen) changegreen = true;
 			if (green < 150) 
 			{
@@ -234,6 +188,7 @@ function countScore()
 			objects.splice(i,1);
 		}else if(objects[i].y >= canvas.height-20)
 		{
+			gameOver = true;
 			changegreen = false;
 			red = 200;
 			green = 0;
@@ -242,25 +197,6 @@ function countScore()
 			if(objects[i].m == 51 || objects[i].m == 54) score-=10;
 			if(score < 0)	score = 0;
 			objects.splice(i,1);
-		}
-	}
-		for(i=0;i<pikes.length;i++)
-		{
-		if(pikes[i].x > Xcoord && pikes[i].x < Xcoord + Rwidth && pikes[i].y >= canvas.height-50) 
-		{
-			changegreen = false;
-			red = 200;			
-			attempts--;			
-			green = 0;
-			score-=5;
-			if(score < 0)	score = 0;
-			pikes[i].pikeCl.remove();
-			pikes.splice(i,1);
-		}
-		if(pikes[i].y > canvas.height - 50) 
-		{
-			pikes[i].pikeCl.remove();
-			pikes.splice(i,1);
 		}
 	}
 }
@@ -280,17 +216,16 @@ function showScore()
 	}else if (!changegreen){
 		ctx.fillStyle = 'red';
 	}		
-	ctx.fillText(score,canvas.width-170,44);	
-	ctx.fillText(attempts,120,137);
+	ctx.fillText(score,canvas.width-100,90);	
 }
 //global function to move rect
 function moveRect()
 {
-	if (result <= 0 || attempts <= 0) return false;
-	var adding = rightPressed ? 5.3 : leftPressed ? -5.3 : 0;
+	if (gameOver) return false;
+	var adding = rightPressed ? 8 : leftPressed ? -8 : 0;
 	Xcoord = Math.max(0,Math.min(Xcoord + adding,canvas.width-140));
 	ctx.beginPath();
-	ctx.fillStyle = '#efeb43';
+	ctx.fillStyle = rectColor;
 	ctx.fillRect(Xcoord,canvas.height-20,Rwidth,Rheight);
 	ctx.closePath();
 	movingTimer = setTimeout(moveRect,1);
@@ -305,7 +240,7 @@ function changeColor()
 	{
 		red--;
 	}
-	canvas.style.backgroundColor = rgbFormat(red,green,blue);
+	canvas.style.backgroundColor = 'black';
 }
 //color parser
 function rgbFormat(red,green,blue)
