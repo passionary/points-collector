@@ -160,16 +160,23 @@
                     <div class="input-section margin-bottom">
                         <label class="label password-label" for="password">Password</label>
                         <input name="password" type="password" id="password" type="text">
-                        <a class="action password-action" href="/">Show password</a>
+                        <a onclick="showPassword('password')" class="action password-action" href="#">Show password</a>
                     </div>
                     <div class="input-section">
                         <label class="label confirm-password-label" for="password2">Confirm Password</label>
                         <input name="password2" type="password" id="password2" type="text">
-                        <a class="action password-action" href="/">Show password</a>
+                        <a onclick="showPassword('password2')" class="action password-action" href="#">Show password</a>
                     </div>
                     <input type="submit" value="REGISTRATION" class="submit__btn" />
                 </form>
             </div>
         </div>
     </body>
+    <script>
+        function showPassword(selector) {
+            const password = document.getElementById(selector);
+            console.log(password.type);
+            password.type = password.type == 'password' ? 'text' : 'password';
+        }
+    </script>
 </html> 

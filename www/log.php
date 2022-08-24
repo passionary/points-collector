@@ -156,12 +156,19 @@
                 <div class="login input-section">
                     <label class="label password-label" for="password">Confirm Password</label>
                     <input name="password" type="password" id="password" type="text">
-                    <a class="action password-action" href="/">Show password</a>
+                    <a onclick="showPassword()" class="action password-action" href="#">Show password</a>
                 </div>
                 <input type="submit" value="SIGN IN" class="submit__btn" />
             </form>
         </div>
     </div>
+    <script>
+        function showPassword() {
+            const password = document.getElementById('password');
+            console.log(password.type);
+            password.type = password.type == 'password' ? 'text' : 'password';
+        }
+    </script>
 </body>
 </html>
 
