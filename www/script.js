@@ -111,6 +111,7 @@ function Run()
 	Time();
 	if(gameOver) 
 	{
+		console.log(score);
 		ctx.clearRect(0,0,canvas.width,canvas.height + 100);
 		canvas.style.backgroundColor = 'black';
 		ctx.font = 'bold 100px arial';
@@ -189,14 +190,6 @@ function countScore()
 		}else if(objects[i].y >= canvas.height-20)
 		{
 			gameOver = true;
-			changegreen = false;
-			red = 200;
-			green = 0;
-			if(objects[i].m == 33 || objects[i].m == 36 || objects[i].m == 39) score-=3;
-			if(objects[i].m == 42 || objects[i].m == 45 || objects[i].m == 48) score-=5;
-			if(objects[i].m == 51 || objects[i].m == 54) score-=10;
-			if(score < 0)	score = 0;
-			objects.splice(i,1);
 		}
 	}
 }
